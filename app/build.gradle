@@ -17,7 +17,7 @@ tasks.withType(JavaCompile) {
 publishConfig {
     zupu {
         name "1.0" //这个可以自己定义
-        url "https://www.zupu.cn/api/v1/versions"
+        url "https://xxxxxxxxxxxxxxx"
         clientId  "XXXXXXX"
         clientSecret  "XXXXXXX"
         grantType "client_credentials"

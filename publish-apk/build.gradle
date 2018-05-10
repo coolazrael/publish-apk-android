@@ -10,7 +10,7 @@ repositories {
     mavenCentral()
 }
 group = 'com.azrael.plugin'
-version = '1.0.0'
+version = '1.0.1'
 description = '族谱网自动上传APK到族谱平台插件，只适用于Gradle'
 uploadArchives {
     repositories {

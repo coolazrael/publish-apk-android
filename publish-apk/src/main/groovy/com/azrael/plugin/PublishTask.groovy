@@ -7,8 +7,7 @@ import org.gradle.api.tasks.Optional
 public class PublishTask extends DefaultTask {
 
     @Optional
-    String assertPath
-
+    Object variants
     private UploadBase submitForm
     private String channelName
 
@@ -20,19 +19,21 @@ public class PublishTask extends DefaultTask {
     @TaskAction
     def publish() {
         channelName = getName().replace(PublishApkPlugin.PLUGIN_PREFIX, "").toLowerCase().replaceAll("(release)|(debug)","")
-        def params = project.publishConfig["$channelName"]
-        submitForm = initUploadType(channelName, params.url, params)
-        submitForm.doAction()
+        if(project.publishConfig.hasProperty("$channelName")){
+            def uploadConfig = project.publishConfig["$channelName"]
+            submitForm = initUploadType(channelName, uploadConfig.url, uploadConfig)
+            submitForm.doAction()
+        }
     }
 
-    def initUploadType(String channelName, String url, Object params) {
+    def initUploadType(String channelName, String url, Object uploadConfig) {
         UploadBase submitFormType
         switch (channelName) {
             case 'zupu':
                 submitFormType = new ZupuUpload(url)
                 break;
         }
-        submitFormType.fillParams(new File(assertPath), params)
+        submitFormType.fillParams(variants.outputs[0].outputFile, uploadConfig)
         return submitFormType;
     }
 }

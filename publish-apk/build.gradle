@@ -1,0 +1,23 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+repositories {
+    mavenCentral()
+}
+group = 'com.azrael.plugin'
+version = '1.0.0'
+description = '族谱网自动上传APK到族谱平台插件，只适用于Gradle'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://nexus.9527.cloud:9527/repository/zupu_test") {
+                authentication(userName: "xsj1287618656", password: "CTT19890427")
+            }
+        }
+    }
+}

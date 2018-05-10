@@ -1,0 +1,69 @@
+repositories {
+    maven {
+        url 'repo'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'com.azrael.apkpublish'
+//apply plugin: com.azrael.plugin.PublishApkPlugin
+
+tasks.withType(JavaCompile) {
+    //enable compilation in a separate daemon process
+    options.fork = true
+
+    //enable incremental compilation
+    options.incremental = true
+}
+publishConfig {
+    zupu {
+        name "1.0" //这个可以自己定义
+        url "https://www.zupu.cn/api/v1/versions"
+        clientId  "XXXXXXX"
+        clientSecret  "XXXXXXX"
+        grantType "client_credentials"
+        grantScope "XXXXXXX"
+        autoUpload true
+        build 1
+        type "Version::Android"
+        description "这是一个描述部分"
+    }
+}
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.3"
+    defaultConfig {
+        applicationId "com.example.xsj49.gradleplugin"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        release {
+        }
+    }
+    productFlavors {
+        zupu {}
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+        }
+    }
+
+}
+//publishConfig{
+//    api = "test"
+//}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+}

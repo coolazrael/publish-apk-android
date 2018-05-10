@@ -41,6 +41,11 @@ This plugin require gradle 3.3 version
             description "这是一个描述部分"
         }
     }
+    android{
+        productFlavors {
+            zupu {}
+        }
+    }
     ```
 3. Then execute build command
     ```

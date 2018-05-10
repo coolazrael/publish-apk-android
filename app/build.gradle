@@ -1,7 +1,4 @@
 repositories {
-    maven {
-        url 'repo'
-    }
 }
 apply plugin: 'com.android.application'
 apply plugin: 'com.azrael.apkpublish'

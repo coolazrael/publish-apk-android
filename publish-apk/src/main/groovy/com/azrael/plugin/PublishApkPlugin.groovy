@@ -18,7 +18,6 @@ public class PublishApkPlugin implements Plugin<Project> {
         if (project.android.hasProperty("applicationVariants")) {
             project.android.applicationVariants.all { variant ->
                 String variantName = variant.name.capitalize()
-                File apkFile = variant.outputs[0].outputFile
                 if(project["$EXTENSION_NAME"].hasProperty(variantName.replace(PublishApkPlugin.PLUGIN_PREFIX, "").toLowerCase().replaceAll("(release)|(debug)",""))){
                     Task task = project.tasks.create("publish$variantName", PublishTask) {
                         variants = variant

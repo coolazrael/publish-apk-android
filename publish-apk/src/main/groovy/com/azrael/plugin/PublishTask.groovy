@@ -8,6 +8,7 @@ public class PublishTask extends DefaultTask {
 
     @Optional
     Object variants
+
     private UploadBase submitForm
     private String channelName
 

@@ -21,7 +21,6 @@ public class PublishApkPlugin implements Plugin<Project> {
                 File apkFile = variant.outputs[0].outputFile
                 if(project["$EXTENSION_NAME"].hasProperty(variantName.replace(PublishApkPlugin.PLUGIN_PREFIX, "").toLowerCase().replaceAll("(release)|(debug)",""))){
                     Task task = project.tasks.create("publish$variantName", PublishTask) {
-                        assertPath = apkFile.getAbsolutePath()
                         variants = variant
                     }
                     if(project.publishConfig[variantName.replace(PublishApkPlugin.PLUGIN_PREFIX, "").toLowerCase().replaceAll("(release)|(debug)","")].autoUpload){

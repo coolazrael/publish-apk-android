@@ -56,7 +56,7 @@ public class HttpURLConnectionUtil {
         conn.setDoOutput(true);
         conn.setDoInput(true);
         conn.setUseCaches(false);
-        conn.setConnectTimeout(10000); //连接超时为10秒
+        conn.setConnectTimeout(100000000); //连接超时为10秒
         conn.setRequestMethod(httpMethod);
         conn.setRequestProperty("connection", "Keep-Alive");
         conn.setRequestProperty("Content-Type",
